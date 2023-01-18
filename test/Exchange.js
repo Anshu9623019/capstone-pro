@@ -87,4 +87,84 @@ describe("Exchange", () => {
       });
     });
   });
+
+  describe("Withdrawing Tokens", async () => {
+    let transaction, result;
+    let amount = tokens(10);
+
+    describe("Success", async () => {
+      beforeEach(async () => {
+        //Approve Token
+        transaction = await token1
+          .connect(user1)
+          .approve(exchange.address, amount);
+        result = await transaction.wait();
+        //Deposite Token
+        transaction = await exchange
+          .connect(user1)
+          .depositeToken(token1.address, amount);
+        result = await transaction.wait();
+
+        // Withdraw tokens
+        transaction = await exchange
+          .connect(user1)
+          .withdrawToken(token1.address, amount);
+        result = await transaction.wait();
+      });
+
+      it("tracks the token deposite", async () => {
+        expect(await token1.balanceOf(exchange.address)).to.equal(0);
+        expect(await exchange.tokens(token1.address, user1.address)).to.equal(
+          0
+        );
+        expect(
+          await exchange.balanceOf(token1.address, user1.address)
+        ).to.equal(0);
+      });
+
+      it("emit a approval event", async () => {
+        const event = result.events[1]; // 2 events are emited
+        expect(event.event).to.equal("Withdraw");
+
+        const args = event.args;
+        expect(args.token).to.equal(token1.address);
+        expect(args.user).to.equal(user1.address);
+        expect(args.amount).to.equal(amount);
+        expect(args.balance).to.equal(0);
+      });
+    });
+
+    describe("Failure", async () => {
+      it("fails for insufficient  balances", async () => {
+        // Attempt to withdraw token withot depositing
+        await expect(
+          exchange.connect(user1).withdrawToken(token1.address, amount)
+        ).to.be.reverted;
+      });
+    });
+  });
+
+  describe("Checking balance", async () => {
+    let transaction, result;
+    let amount = tokens(1);
+
+    beforeEach(async () => {
+      //Approve Token
+      transaction = await token1
+        .connect(user1)
+        .approve(exchange.address, amount);
+      result = await transaction.wait();
+      //Deposite Token
+      transaction = await exchange
+        .connect(user1)
+        .depositeToken(token1.address, amount);
+      result = await transaction.wait();
+    });
+
+    it("returns the user balance", async () => {
+      expect(await exchange.balanceOf(token1.address, user1.address)).to.equal(
+        amount
+      );
+    });
+  });
 });
