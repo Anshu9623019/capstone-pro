@@ -54,7 +54,7 @@ describe("Exchange", () => {
       //Deposite Token
       transaction = await exchange
         .connect(user1)
-        .depositeToken(token1.address, amount);
+        .depositToken(token1.address, amount);
       result = await transaction.wait();
     });
     describe("Success", async () => {
@@ -84,7 +84,7 @@ describe("Exchange", () => {
       it("fails when no token ", async () => {
         // Don't approve any tokens before depositing
         await expect(
-          exchange.connect(user1).depositeToken(token1.address, amount)
+          exchange.connect(user1).depositToken(token1.address, amount)
         ).to.be.reverted;
       });
     });
@@ -104,7 +104,7 @@ describe("Exchange", () => {
         //Deposite Token
         transaction = await exchange
           .connect(user1)
-          .depositeToken(token1.address, amount);
+          .depositToken(token1.address, amount);
         result = await transaction.wait();
 
         // Withdraw tokens
@@ -159,7 +159,7 @@ describe("Exchange", () => {
       //Deposite Token
       transaction = await exchange
         .connect(user1)
-        .depositeToken(token1.address, amount);
+        .depositToken(token1.address, amount);
       result = await transaction.wait();
     });
 
@@ -184,7 +184,7 @@ describe("Exchange", () => {
         //Deposite Token
         transaction = await exchange
           .connect(user1)
-          .depositeToken(token1.address, amount);
+          .depositToken(token1.address, amount);
         result = await transaction.wait();
 
         // make order
@@ -236,7 +236,7 @@ describe("Exchange", () => {
       result = await transaction.wait();
       transaction = await exchange
         .connect(user1)
-        .depositeToken(token1.address, amount);
+        .depositToken(token1.address, amount);
       result = await transaction.wait();
       // Give tokens to user2
       transaction = await token2
@@ -252,7 +252,7 @@ describe("Exchange", () => {
 
       transaction = await exchange
         .connect(user2)
-        .depositeToken(token2.address, tokens(2));
+        .depositToken(token2.address, tokens(2));
       result = await transaction.wait();
       // make order
       transaction = await exchange
@@ -295,7 +295,7 @@ describe("Exchange", () => {
           //Deposite Token
           transaction = await exchange
             .connect(user1)
-            .depositeToken(token1.address, amount);
+            .depositToken(token1.address, amount);
           result = await transaction.wait();
 
           // make order

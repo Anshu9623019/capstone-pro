@@ -68,7 +68,7 @@ contract Exchange {
     }
 
     // Deposite Token
-    function depositeToken(address _token, uint256 _amount) public {
+    function depositToken(address _token, uint256 _amount) public {
         // Transfer tokens to exchange
         require(Token(_token).transferFrom(msg.sender, address(this), _amount));
 
