@@ -4,7 +4,7 @@ import Blockies from "react-blockies";
 import logo from "../assets/logo.png";
 import eth from "../assets/eth.svg";
 
-import { loadAccount } from "../store/interactions";
+import { loadAccount } from "../store1/interactions";
 
 import config from "../config.json";
 

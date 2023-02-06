@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { makeBuyOrder, makeSellOrder } from "../store/interactions";
+import { makeBuyOrder, makeSellOrder } from "../store1/interactions";
 
 const Order = () => {
   const [isBuy, setIsBuy] = useState(true);

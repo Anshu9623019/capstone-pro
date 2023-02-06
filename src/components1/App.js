@@ -9,7 +9,7 @@ import {
   loadTokens,
   loadExchange,
   subscribeToEvents,
-} from "../store/interactions";
+} from "../store1/interactions";
 
 import Navbar from "./Navbar";
 import Markets from "./Markets";

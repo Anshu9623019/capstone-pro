@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import dapp from "../assets/dapp.svg";
 import eth from "../assets/eth.svg";
 
-import { loadBalances, transferTokens } from "../store/interactions";
+import { loadBalances, transferTokens } from "../store1/interactions";
 
 const Balance = () => {
   const [isDeposit, setIsDeposit] = useState(true);
